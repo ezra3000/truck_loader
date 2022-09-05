@@ -23,18 +23,12 @@ def depart(truck, points, address_table, package_table):
             destinations.append(p.address.add_id)
 
     for n in visited:
-        # print("MILES:", truck.mileage)
         distance_list = address_table.get(n).distance_list
         next_stop_id = find_next_closest(distance_list, destinations)
-        # print("NEXT STOP", next_stop_id)
         if next_stop_id != -1:
             next_stop = address_table.get(next_stop_id)
             truck.status = "On route to: " + next_stop.address_name
-
             miles_traveled = next_stop.distance_list[n]
-           # print(distance_list)
-           # print("ADDING:", miles_traveled)
-
             points_to_minus = miles_traveled / 0.3
             points -= points_to_minus
             if points >= 0:
@@ -54,10 +48,4 @@ def depart(truck, points, address_table, package_table):
 
             points_to_minus = miles_traveled / 0.3
             points -= points_to_minus
-
-    print(truck.mileage)
     return points
-
-
-def return_trip(truck1, points, address_table, package_table):
-    return None
